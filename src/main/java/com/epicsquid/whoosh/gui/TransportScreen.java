@@ -8,7 +8,6 @@ import com.epicsquid.whoosh.Whoosh;
 import com.epicsquid.whoosh.containers.TransporterMenu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +18,7 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 	public static final ResourceLocation TEXTURE = new ResourceLocation(Whoosh.MODID,  "textures/gui/transporter.png");
 
 	private EditBox editBox;
+	private boolean ignoreTextInput;
 
 	public TransportScreen(TransporterMenu container, Inventory inv, Component component) {
 		super(container, inv, component);
@@ -38,13 +38,14 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 			return;
 		}
 
-		String s = editBox != null ? editBox.getValue() : "";
-		editBox = new EditBox(this.minecraft.font,  10, 24, 83, 12, new TranslatableComponent("itemGroup.search"));
-		editBox.setMaxLength(50);
-		editBox.setBordered(false);
+		int i = (this.width - 192) / 2;
+		int j = (this.height - 109) / 2;
+		editBox = new EditBox(this.minecraft.font,  i+16, j - 6, 83, 12, new TranslatableComponent("itemGroup.search"));
+		editBox.setMaxLength(20);
+		editBox.setBordered(true);
 		editBox.setVisible(true);
 		editBox.setTextColor(16777215);
-		editBox.setValue("Test");
+		editBox.setValue("");
 
 		addWidget(editBox);
 		addElement(getList());
@@ -59,25 +60,15 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 	}
 
 	@Override
-	protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
-		RenderHelper.resetShaderColor();
-		RenderHelper.setPosTexShader();
-		RenderHelper.setShaderTexture0(texture);
-
-		drawTexturedModalRect(poseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
-		poseStack.pushPose();
-		poseStack.translate(leftPos, topPos, 0.0F);
-
+	public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
+		super.render(poseStack, mouseX, mouseY, partialTicks);
+		int i = (this.width - 192) / 2;
+		int j = (this.height - 109) / 2;
 		if (minecraft != null && !editBox.isFocused() && editBox.getValue().isEmpty()) {
-			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), 10, 24, -1);
+			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), i + 18, j - 4, -1);
 		} else {
 			editBox.render(poseStack, mouseX, mouseY, partialTicks);
 		}
-
-		drawPanels(poseStack, false);
-		drawElements(poseStack, false);
-
-		poseStack.popPose();
 	}
 
 	@Override
@@ -97,5 +88,41 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 			return true;
 		}
 		return super.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+
+	@Override
+	protected void containerTick() {
+		super.containerTick();
+		editBox.tick();
+	}
+
+	@Override
+	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+		ignoreTextInput = false;
+		if (editBox.keyPressed(keyCode, scanCode, modifiers)) {
+			return true;
+		} else if (editBox.isFocused() && editBox.isVisible() && keyCode != 256) {
+			return true;
+		} else if (minecraft != null && minecraft.options.keyChat.matches(keyCode, scanCode) && !editBox.isFocused()) {
+			ignoreTextInput = true;
+			editBox.setFocus(true);
+			return true;
+		}
+		return super.keyPressed(keyCode, scanCode, modifiers);
+	}
+
+	@Override
+	public boolean charTyped(char codePoint, int modifiers) {
+		if (this.ignoreTextInput) {
+			return false;
+		} else if (minecraft != null && minecraft.player != null && minecraft.player.isSpectator()) {
+			if (editBox.charTyped(codePoint, modifiers)) {
+				return true;
+			} else {
+				return super.charTyped(codePoint, modifiers);
+			}
+		} else {
+			return false;
+		}
 	}
 }
