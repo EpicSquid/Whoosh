@@ -13,6 +13,6 @@ public class WhooshItems {
 			.tab(() -> Whoosh.CREATIVE_TAB)
 			.register();
 
-	public static void classload() {
+	public static void init() {
 	}
 }

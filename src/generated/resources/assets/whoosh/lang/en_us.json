@@ -1,3 +1,6 @@
 {
+  "gui.whoosh.transporter": "Transporter",
+  "info.whoosh.transporter.mod.teleport": "Teleport",
+  "info.whoosh.transporter.mode.blink": "Blink",
   "item.whoosh.transporter": "Transporter"
 }

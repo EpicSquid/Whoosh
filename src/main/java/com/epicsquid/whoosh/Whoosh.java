@@ -1,6 +1,8 @@
 package com.epicsquid.whoosh;
 
 import com.epicsquid.whoosh.init.WhooshItems;
+import com.epicsquid.whoosh.init.WhooshLang;
+import com.epicsquid.whoosh.init.WhooshMenuTypes;
 import com.tterrag.registrate.Registrate;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -30,8 +32,10 @@ public class Whoosh {
 		// Register the setup method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-		// Init items
-		WhooshItems.classload();
+		// Register all the things
+		WhooshLang.init();
+		WhooshMenuTypes.init();
+		WhooshItems.init();
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
