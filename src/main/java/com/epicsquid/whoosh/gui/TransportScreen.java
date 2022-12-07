@@ -7,13 +7,18 @@ import cofh.core.util.helpers.RenderHelper;
 import com.epicsquid.whoosh.Whoosh;
 import com.epicsquid.whoosh.containers.TransporterMenu;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(Whoosh.MODID,  "textures/gui/transporter.png");
+
+	private EditBox editBox;
 
 	public TransportScreen(TransporterMenu container, Inventory inv, Component component) {
 		super(container, inv, component);
@@ -29,6 +34,19 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		imageWidth = 192;
 		imageHeight = 109;
 
+		if (this.minecraft == null) {
+			return;
+		}
+
+		String s = editBox != null ? editBox.getValue() : "";
+		editBox = new EditBox(this.minecraft.font,  10, 24, 83, 12, new TranslatableComponent("itemGroup.search"));
+		editBox.setMaxLength(50);
+		editBox.setBordered(false);
+		editBox.setVisible(true);
+		editBox.setTextColor(16777215);
+		editBox.setValue("Test");
+
+		addWidget(editBox);
 		addElement(getList());
 	}
 
@@ -50,6 +68,12 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		poseStack.pushPose();
 		poseStack.translate(leftPos, topPos, 0.0F);
 
+		if (minecraft != null && !editBox.isFocused() && editBox.getValue().isEmpty()) {
+			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), 10, 24, -1);
+		} else {
+			editBox.render(poseStack, mouseX, mouseY, partialTicks);
+		}
+
 		drawPanels(poseStack, false);
 		drawElements(poseStack, false);
 
@@ -65,5 +89,13 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 //		RenderHelper.setShaderTexture0(SLOT_OVERLAY);
 //		drawTexturedModalRect(poseStack, menu.lockedSlot.x, menu.lockedSlot.y, 0, 0, 16, 16, 16, 16);
 //		GlStateManager._disableBlend();
+	}
+
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+		if (editBox.mouseClicked(mouseX, mouseY, mouseButton)) {
+			return true;
+		}
+		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 }
