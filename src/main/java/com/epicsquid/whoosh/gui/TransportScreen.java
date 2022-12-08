@@ -1,9 +1,10 @@
 package com.epicsquid.whoosh.gui;
 
 import cofh.core.client.gui.ContainerScreenCoFH;
+import cofh.core.client.gui.element.ElementBase;
+import cofh.core.client.gui.element.ElementButton;
 import cofh.core.client.gui.element.ElementListBox;
 import cofh.core.client.gui.element.listbox.ListBoxElementText;
-import cofh.core.util.helpers.RenderHelper;
 import com.epicsquid.whoosh.Whoosh;
 import com.epicsquid.whoosh.containers.TransporterMenu;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,19 +12,25 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.entity.player.Inventory;
+
+import static cofh.lib.util.helpers.SoundHelper.playClickSound;
 
 public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(Whoosh.MODID,  "textures/gui/transporter.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Whoosh.MODID, "textures/gui/transporter.png");
 
 	private EditBox editBox;
+	private ElementListBox pointsList;
 	private boolean ignoreTextInput;
 
 	public TransportScreen(TransporterMenu container, Inventory inv, Component component) {
 		super(container, inv, component);
 
 		texture = TEXTURE;
+		imageWidth = 176;
+		imageHeight = 142;
 
 		drawInventory = false;
 	}
@@ -31,8 +38,6 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 	@Override
 	public void init() {
 		super.init();
-		imageWidth = 192;
-		imageHeight = 109;
 
 		if (this.minecraft == null) {
 			return;
@@ -40,7 +45,7 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 
 		int i = (this.width - 192) / 2;
 		int j = (this.height - 109) / 2;
-		editBox = new EditBox(this.minecraft.font,  i+16, j - 6, 83, 12, new TranslatableComponent("itemGroup.search"));
+		editBox = new EditBox(this.minecraft.font, i + 16, j + 6, 83, 12, new TranslatableComponent("itemGroup.search"));
 		editBox.setMaxLength(20);
 		editBox.setBordered(true);
 		editBox.setVisible(true);
@@ -48,15 +53,45 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		editBox.setValue("");
 
 		addWidget(editBox);
-		addElement(getList());
+		addButtons();
+		addList();
 	}
 
-	private ElementListBox getList() {
-		ElementListBox list = new ElementListBox(this, 8, 39, 83, 12);
+	private void addButtons() {
+		ElementBase addPoint = new ElementButton(this, 95, 20)
+				.setName("AddPoint")
+				.setSize(16, 16)
+				.setTexture(Whoosh.MODID + ":textures/gui/button_add.png", 48, 16)
+				.setEnabled(() -> !StringUtil.isNullOrEmpty(editBox.getValue()));
+		ElementBase removePoint = new ElementButton(this, 111, 20)
+				.setName("RemovePoint")
+				.setSize(16, 16)
+				.setTexture(Whoosh.MODID + ":textures/gui/button_remove.png", 48, 16);
 
-		list.add(new ListBoxElementText("Test"));
+		addElement(addPoint);
+		addElement(removePoint);
+	}
 
-		return list;
+	@Override
+	public boolean handleElementButtonClick(String buttonName, int mouseButton) {
+		float pitch = 0.7f;
+		switch (buttonName) {
+			case "AddPoint" -> {
+				pointsList.add(new ListBoxElementText(editBox.getValue()));
+				pitch += 0.1F;
+			}
+			case "RemovePoint" -> {
+				pointsList.removeAll();
+				pitch -= 0.1F;
+			}
+		}
+		playClickSound(pitch);
+		return true;
+	}
+
+	private void addList() {
+		pointsList = new ElementListBox(this, 8, 43, 83, 91);
+		addElement(pointsList);
 	}
 
 	@Override
@@ -65,7 +100,7 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		int i = (this.width - 192) / 2;
 		int j = (this.height - 109) / 2;
 		if (minecraft != null && !editBox.isFocused() && editBox.getValue().isEmpty()) {
-			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), i + 18, j - 4, -1);
+			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), i + 18, j + 8, -1);
 		} else {
 			editBox.render(poseStack, mouseX, mouseY, partialTicks);
 		}
@@ -112,15 +147,16 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 	}
 
 	@Override
+	public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
+		return false;
+	}
+
+	@Override
 	public boolean charTyped(char codePoint, int modifiers) {
 		if (this.ignoreTextInput) {
 			return false;
-		} else if (minecraft != null && minecraft.player != null && minecraft.player.isSpectator()) {
-			if (editBox.charTyped(codePoint, modifiers)) {
-				return true;
-			} else {
-				return super.charTyped(codePoint, modifiers);
-			}
+		} else if (minecraft != null && minecraft.player != null && !minecraft.player.isSpectator()) {
+			return editBox.charTyped(codePoint, modifiers);
 		} else {
 			return false;
 		}
