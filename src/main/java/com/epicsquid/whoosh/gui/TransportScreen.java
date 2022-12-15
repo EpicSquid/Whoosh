@@ -4,13 +4,15 @@ import cofh.core.client.gui.ContainerScreenCoFH;
 import cofh.core.client.gui.element.ElementBase;
 import cofh.core.client.gui.element.ElementButton;
 import cofh.core.client.gui.element.ElementListBox;
-import cofh.core.client.gui.element.listbox.ListBoxElementText;
 import com.epicsquid.whoosh.Whoosh;
 import com.epicsquid.whoosh.containers.TransporterMenu;
+import com.epicsquid.whoosh.init.WhooshLang;
+import com.epicsquid.whoosh.utils.TransporterPoint;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,6 +26,7 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 	private EditBox editBox;
 	private ElementListBox pointsList;
 	private boolean ignoreTextInput;
+	private TransporterPoint currentPoint;
 
 	public TransportScreen(TransporterMenu container, Inventory inv, Component component) {
 		super(container, inv, component);
@@ -45,7 +48,7 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 
 		int i = (this.width - 192) / 2;
 		int j = (this.height - 109) / 2;
-		editBox = new EditBox(this.minecraft.font, i + 16, j + 6, 83, 12, new TranslatableComponent("itemGroup.search"));
+		editBox = new EditBox(this.minecraft.font, i + 16, j + 6, 83, 12, WhooshLang.ENTER_NAME);
 		editBox.setMaxLength(20);
 		editBox.setBordered(true);
 		editBox.setVisible(true);
@@ -63,13 +66,20 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 				.setSize(16, 16)
 				.setTexture(Whoosh.MODID + ":textures/gui/button_add.png", 48, 16)
 				.setEnabled(() -> !StringUtil.isNullOrEmpty(editBox.getValue()));
-		ElementBase removePoint = new ElementButton(this, 111, 20)
+		ElementBase removePoint = new ElementButton(this, 113, 20)
 				.setName("RemovePoint")
 				.setSize(16, 16)
 				.setTexture(Whoosh.MODID + ":textures/gui/button_remove.png", 48, 16);
 
+		ElementBase whooshButton = new ElementTextButton(this, 95, 108)
+				.setText(WhooshLang.BUTTON_WHOOSH)
+				.setName("Whoosh")
+				.setSize(74, 16)
+				.setTexture(Whoosh.MODID + ":textures/gui/button_whoosh.png", 222, 16);
+
 		addElement(addPoint);
 		addElement(removePoint);
+		addElement(whooshButton);
 	}
 
 	@Override
@@ -77,20 +87,29 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		float pitch = 0.7f;
 		switch (buttonName) {
 			case "AddPoint" -> {
-				pointsList.add(new ListBoxElementText(editBox.getValue()));
+				pointsList.add(new ListBoxPointElement(getPoint()));
 				pitch += 0.1F;
 			}
 			case "RemovePoint" -> {
 				pointsList.removeAll();
 				pitch -= 0.1F;
 			}
+			case "Whoosh" -> {
+				pitch += 0.3F;
+//				player.teleportTo();
+			}
 		}
 		playClickSound(pitch);
 		return true;
 	}
 
+	private TransporterPoint getPoint() {
+		BlockPos pos = player.blockPosition();
+		return new TransporterPoint(pos.getX(), pos.getY(), pos.getZ(), player.level.dimension().location().getPath(), editBox.getValue());
+	}
+
 	private void addList() {
-		pointsList = new ElementListBox(this, 8, 43, 83, 91);
+		pointsList = new ElementPointListBox(this, 8, 43, 83, 90, (p) -> currentPoint = p);
 		addElement(pointsList);
 	}
 
@@ -100,9 +119,17 @@ public class TransportScreen extends ContainerScreenCoFH<TransporterMenu> {
 		int i = (this.width - 192) / 2;
 		int j = (this.height - 109) / 2;
 		if (minecraft != null && !editBox.isFocused() && editBox.getValue().isEmpty()) {
-			drawString(poseStack, minecraft.font, new TranslatableComponent("itemGroup.search"), i + 18, j + 8, -1);
+			drawString(poseStack, minecraft.font, WhooshLang.ENTER_NAME, i + 18, j + 8, -1);
 		} else {
 			editBox.render(poseStack, mouseX, mouseY, partialTicks);
+		}
+
+		// Draw the current point info
+		if (currentPoint != null) {
+			drawString(poseStack, minecraft.font, new TextComponent(currentPoint.dim()), i + 106, j + 29, -1);
+			drawString(poseStack, minecraft.font, new TextComponent("X: " + currentPoint.x()), i + 106, j + 39, -1);
+			drawString(poseStack, minecraft.font, new TextComponent("Y: " + currentPoint.y()), i + 106, j + 49, -1);
+			drawString(poseStack, minecraft.font, new TextComponent("Z: " + currentPoint.z()), i + 106, j + 59, -1);
 		}
 	}
 

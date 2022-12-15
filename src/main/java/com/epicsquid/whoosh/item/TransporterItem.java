@@ -72,7 +72,7 @@ public class TransporterItem extends EnergyContainerItemAugmentable implements I
 	@Override
 	@NotNull
 	public Component getDisplayName() {
-		return WhooshItems.TRANSPORTER.asStack().getDisplayName();
+		return WhooshLang.TRANSPORTER;
 	}
 
 	@Nullable

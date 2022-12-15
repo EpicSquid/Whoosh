@@ -1,4 +1,6 @@
 {
+  "gui.whoosh.button.whoosh": "Whoosh",
+  "gui.whoosh.enter_name": "Enter Name",
   "gui.whoosh.transporter": "Transporter",
   "info.whoosh.transporter.mod.teleport": "Teleport",
   "info.whoosh.transporter.mode.blink": "Blink",
