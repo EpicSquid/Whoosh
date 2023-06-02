@@ -8,9 +8,10 @@ public class ListBoxPointElement extends ListBoxElementText {
 	private final TransporterPoint point;
 
 	public ListBoxPointElement(TransporterPoint point) {
-		super(point.name());
+		super(point.dim());
 		this.point = point;
 	}
+
 
 	@Override
 	public TransporterPoint getValue() {

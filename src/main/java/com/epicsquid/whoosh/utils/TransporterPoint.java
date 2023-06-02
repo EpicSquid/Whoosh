@@ -23,6 +23,9 @@ public class TransporterPoint implements INBTSerializable<CompoundTag> {
 
 	}
 
+	public TransporterPoint(int x, int y, int z, String path, String value) {
+	}
+
 	public int x() {
 		return x;
 	}
