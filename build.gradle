@@ -98,20 +98,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven { // Registrate
-        url "http://maven.tterrag.com/"
-    }
-    mavenLocal()
-
 }
 
 dependencies {
 
     minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
+
     // MC<minecraft_version>-<registrate_version>
-    implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.19.3-1.1.6")
-    // [MC<minecraft_version>,MC<next_minecraft_version>)
-    jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.3,MC1.20)")
+//        implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.19.3-1.1.6")
+//        // [MC<minecraft_version>,MC<next_minecraft_version>)
+//        jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.2,MC1.20)")
+
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -145,6 +142,11 @@ publishing {
         maven {
             url "file://${project.projectDir}/mcmodsrepo"
         }
+//        maven { // Registrate
+//            url "http://maven.tterrag.com/"
+//        }
+//    mavenLocal()
+//    }
     }
 }
 
