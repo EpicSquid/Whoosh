@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.init
+package com.epicsquid.whoosh.registery
 
 import com.epicsquid.whoosh.containers.TransporterMenu
 import com.epicsquid.whoosh.gui.TransportScreen

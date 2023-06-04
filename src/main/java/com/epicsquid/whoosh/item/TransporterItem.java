@@ -6,9 +6,8 @@ import cofh.lib.util.Utils;
 import cofh.thermal.lib.item.EnergyContainerItemAugmentable;
 import cofh.thermal.lib.item.IFlexibleEnergyContainerItem;
 import com.epicsquid.whoosh.containers.TransporterMenu;
-import com.epicsquid.whoosh.init.WhooshItems;
-import com.epicsquid.whoosh.init.WhooshLang;
-import com.epicsquid.whoosh.init.WhooshMenuTypes;
+import com.epicsquid.whoosh.registery.WhooshLang;
+import com.epicsquid.whoosh.registery.WhooshMenuTypes;
 import com.epicsquid.whoosh.utils.TeleportUtils;
 import com.tterrag.registrate.util.nullness.NonnullType;
 import net.minecraft.network.chat.Component;
@@ -26,8 +25,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 

@@ -6,7 +6,7 @@ import cofh.core.client.gui.element.ElementButton;
 import cofh.core.client.gui.element.ElementListBox;
 import com.epicsquid.whoosh.Whoosh;
 import com.epicsquid.whoosh.containers.TransporterMenu;
-import com.epicsquid.whoosh.init.WhooshLang;
+import com.epicsquid.whoosh.registery.WhooshLang;
 import com.epicsquid.whoosh.utils.TransporterPoint;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.EditBox;

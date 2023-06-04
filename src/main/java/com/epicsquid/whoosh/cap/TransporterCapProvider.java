@@ -1,10 +1,8 @@
 package com.epicsquid.whoosh.cap;
 
-import com.epicsquid.whoosh.init.WhooshCaps;
-import net.minecraft.core.BlockPos;
+import com.epicsquid.whoosh.registery.WhooshCaps;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;

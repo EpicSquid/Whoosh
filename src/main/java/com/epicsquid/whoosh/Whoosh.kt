@@ -1,8 +1,8 @@
 package dev.epicsquid.whoosh
 
-import com.epicsquid.whoosh.init.WhooshItems
-import com.epicsquid.whoosh.init.WhooshLang
-import com.epicsquid.whoosh.init.WhooshMenuTypes
+import com.epicsquid.whoosh.registery.WhooshItems
+import com.epicsquid.whoosh.registery.WhooshLang
+import com.epicsquid.whoosh.registery.WhooshMenuTypes
 import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.util.nullness.NonnullType
 import net.minecraft.world.item.CreativeModeTab
