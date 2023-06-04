@@ -1,8 +1,8 @@
-package com.epicsquid.whoosh.registery
+package dev.epicsquid.whoosh.registery
 
-import com.epicsquid.whoosh.cap.ITransporterCap
-import com.epicsquid.whoosh.cap.TransporterCapProvider
-import com.epicsquid.whoosh.item.TransporterItem
+import dev.epicsquid.whoosh.cap.ITransporterCap
+import dev.epicsquid.whoosh.cap.TransporterCapProvider
+import dev.epicsquid.whoosh.item.TransporterItem
 import dev.epicsquid.whoosh.Whoosh
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item

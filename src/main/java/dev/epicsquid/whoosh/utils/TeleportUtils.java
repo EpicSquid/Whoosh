@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.utils;
+package dev.epicsquid.whoosh.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

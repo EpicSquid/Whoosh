@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.item
+package dev.epicsquid.whoosh.item
 
 import cofh.core.item.IMultiModeItem
 import cofh.lib.util.Utils
@@ -6,10 +6,10 @@ import cofh.lib.util.constants.NBTTags
 import cofh.thermal.lib.common.ThermalAugmentRules
 import cofh.thermal.lib.item.EnergyContainerItemAugmentable
 import cofh.thermal.lib.item.IFlexibleEnergyContainerItem
-import com.epicsquid.whoosh.containers.TransporterMenu
-import com.epicsquid.whoosh.registery.WhooshLang
-import com.epicsquid.whoosh.registery.WhooshMenuTypes
-import com.epicsquid.whoosh.utils.TeleportUtils
+import dev.epicsquid.whoosh.containers.TransporterMenu
+import dev.epicsquid.whoosh.registery.WhooshLang
+import dev.epicsquid.whoosh.registery.WhooshMenuTypes
+import dev.epicsquid.whoosh.utils.TeleportUtils
 import com.tterrag.registrate.util.nullness.NonnullType
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer

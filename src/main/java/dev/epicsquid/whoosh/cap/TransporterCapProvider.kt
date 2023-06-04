@@ -1,6 +1,6 @@
-package com.epicsquid.whoosh.cap
+package dev.epicsquid.whoosh.cap
 
-import com.epicsquid.whoosh.registery.WhooshCaps
+import dev.epicsquid.whoosh.registery.WhooshCaps
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraftforge.common.capabilities.Capability

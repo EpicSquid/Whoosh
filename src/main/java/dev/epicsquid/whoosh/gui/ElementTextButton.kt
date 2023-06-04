@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.gui
+package dev.epicsquid.whoosh.gui
 
 import cofh.core.client.gui.IGuiAccess
 import cofh.core.client.gui.element.ElementButton

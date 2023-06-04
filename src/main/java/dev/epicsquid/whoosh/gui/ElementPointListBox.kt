@@ -1,17 +1,17 @@
-package com.epicsquid.whoosh.gui
+package dev.epicsquid.whoosh.gui
 
 import cofh.core.client.gui.element.ElementListBox
 import cofh.core.client.gui.element.listbox.IListBoxElement
-import com.epicsquid.whoosh.utils.TransporterPoint
+import dev.epicsquid.whoosh.utils.TransporterPoint
 import java.util.function.Consumer
 
 class ElementPointListBox(
-    screen: TransportScreen?,
-    x: Int,
-    y: Int,
-    width: Int,
-    height: Int,
-    private val onChange: Consumer<TransporterPoint>
+	screen: TransportScreen?,
+	x: Int,
+	y: Int,
+	width: Int,
+	height: Int,
+	private val onChange: Consumer<TransporterPoint>
 ) : ElementListBox(screen, x, y, width, height) {
     override fun onSelectionChanged(newIndex: Int, newElement: IListBoxElement) {
         super.onSelectionChanged(newIndex, newElement)

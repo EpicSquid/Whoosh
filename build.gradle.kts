@@ -9,7 +9,7 @@ plugins {
     id("org.spongepowered.mixin")
 }
 
-version = "1.19.2-3.0.1"
+version = "1.19.2-2.0.0"
 group = "dev.epicsquid"
 
 val modid: String = "whoosh"

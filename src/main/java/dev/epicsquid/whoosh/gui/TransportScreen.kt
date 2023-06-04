@@ -1,13 +1,12 @@
-package com.epicsquid.whoosh.gui
+package dev.epicsquid.whoosh.gui
 
 import cofh.core.client.gui.ContainerScreenCoFH
 import cofh.core.client.gui.element.ElementButton
 import cofh.core.client.gui.element.ElementListBox
 import cofh.lib.util.helpers.SoundHelper
-import com.epicsquid.whoosh.containers.TransporterMenu
-import com.epicsquid.whoosh.gui.TransportScreen.Companion.TEXTURE
-import com.epicsquid.whoosh.registery.WhooshLang
-import com.epicsquid.whoosh.utils.TransporterPoint
+import dev.epicsquid.whoosh.containers.TransporterMenu
+import dev.epicsquid.whoosh.registery.WhooshLang
+import dev.epicsquid.whoosh.utils.TransporterPoint
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.epicsquid.whoosh.Whoosh
 import net.minecraft.client.gui.components.EditBox

@@ -1,6 +1,6 @@
-package com.epicsquid.whoosh.cap
+package dev.epicsquid.whoosh.cap
 
-import com.epicsquid.whoosh.utils.TransporterPoint
+import dev.epicsquid.whoosh.utils.TransporterPoint
 import net.minecraft.nbt.CompoundTag
 
 object TransporterCap : ITransporterCap {

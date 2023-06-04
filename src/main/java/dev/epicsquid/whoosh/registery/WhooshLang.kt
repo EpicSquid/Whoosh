@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.registery
+package dev.epicsquid.whoosh.registery
 
 import com.tterrag.registrate.Registrate
 import dev.epicsquid.whoosh.Whoosh

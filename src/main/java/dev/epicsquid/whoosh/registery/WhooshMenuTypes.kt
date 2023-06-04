@@ -1,7 +1,7 @@
-package com.epicsquid.whoosh.registery
+package dev.epicsquid.whoosh.registery
 
-import com.epicsquid.whoosh.containers.TransporterMenu
-import com.epicsquid.whoosh.gui.TransportScreen
+import dev.epicsquid.whoosh.containers.TransporterMenu
+import dev.epicsquid.whoosh.gui.TransportScreen
 import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.builders.MenuBuilder.ScreenFactory
 import dev.epicsquid.whoosh.Whoosh

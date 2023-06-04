@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.utils;
+package dev.epicsquid.whoosh.utils;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;

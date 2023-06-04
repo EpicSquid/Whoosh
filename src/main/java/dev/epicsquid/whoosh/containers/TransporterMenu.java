@@ -1,4 +1,4 @@
-package com.epicsquid.whoosh.containers;
+package dev.epicsquid.whoosh.containers;
 
 import cofh.core.inventory.container.ContainerCoFH;
 import net.minecraft.network.FriendlyByteBuf;

@@ -1,6 +1,6 @@
-package com.epicsquid.whoosh.registery
+package dev.epicsquid.whoosh.registery
 
-import com.epicsquid.whoosh.item.TransporterItem
+import dev.epicsquid.whoosh.item.TransporterItem
 import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.util.entry.ItemEntry
 import com.tterrag.registrate.util.nullness.NonNullFunction
