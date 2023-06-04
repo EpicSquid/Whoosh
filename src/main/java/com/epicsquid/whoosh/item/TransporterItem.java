@@ -10,6 +10,7 @@ import com.epicsquid.whoosh.init.WhooshItems;
 import com.epicsquid.whoosh.init.WhooshLang;
 import com.epicsquid.whoosh.init.WhooshMenuTypes;
 import com.epicsquid.whoosh.utils.TeleportUtils;
+import com.tterrag.registrate.util.nullness.NonnullType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -70,14 +71,13 @@ public class TransporterItem extends EnergyContainerItemAugmentable implements I
 	}
 
 	@Override
-	@NotNull
 	public Component getDisplayName() {
 		return WhooshLang.TRANSPORTER;
 	}
 
-	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, @NotNull Inventory playerInv, @NotNull Player player) {
+
+	public AbstractContainerMenu createMenu(int id, @NonnullType Inventory playerInv, @NonnullType Player player) {
 		return new TransporterMenu(WhooshMenuTypes.TRANSPORTER.get(), id, playerInv, player);
 	}
 

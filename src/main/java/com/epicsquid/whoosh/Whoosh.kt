@@ -12,8 +12,8 @@ import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 
-@Mod(whoosh.MODID)
-class whoosh {
+@Mod(Whoosh.MODID)
+class Whoosh {
     companion object {
         const val MODID = "whoosh"
 
