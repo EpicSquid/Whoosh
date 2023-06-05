@@ -5,9 +5,9 @@ import net.minecraft.nbt.CompoundTag
 
 object TransporterCap : ITransporterCap {
     override val points: MutableMap<String?, TransporterPoint?> = HashMap()
-    fun getPoints(): Map<String?, TransporterPoint?> {
-        return java.util.Map.copyOf(points)
-    }
+//    fun getPoints(): Map<String?, TransporterPoint?> {
+//        return java.util.Map.copyOf(points)
+//    }
 
     override fun addPoint(name: String?, point: TransporterPoint?) {
         points[name] = point

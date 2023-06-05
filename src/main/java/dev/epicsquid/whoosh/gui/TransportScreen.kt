@@ -4,24 +4,16 @@ import cofh.core.client.gui.ContainerScreenCoFH
 import cofh.core.client.gui.element.ElementButton
 import cofh.core.client.gui.element.ElementListBox
 import cofh.lib.util.helpers.SoundHelper
-<<<<<<< Updated upstream:src/main/java/dev/epicsquid/whoosh/gui/TransportScreen.kt
+import com.mojang.blaze3d.vertex.PoseStack
+import dev.epicsquid.whoosh.Whoosh
 import dev.epicsquid.whoosh.containers.TransporterMenu
 import dev.epicsquid.whoosh.registery.WhooshLang
 import dev.epicsquid.whoosh.utils.TransporterPoint
-=======
-import com.epicsquid.whoosh.containers.TransporterMenu
-import com.epicsquid.whoosh.registery.WhooshLang
-import com.epicsquid.whoosh.utils.TransporterPoint
->>>>>>> Stashed changes:src/main/java/com/epicsquid/whoosh/gui/TransportScreen.kt
-import com.mojang.blaze3d.vertex.PoseStack
-import dev.epicsquid.whoosh.Whoosh
-import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.StringUtil
 import net.minecraft.world.entity.player.Inventory
-import java.awt.TextComponent
 
 class TransportScreen(container: TransporterMenu?, inv: Inventory?, component: Component?) :
     ContainerScreenCoFH<TransporterMenu?>(container, inv, component) {

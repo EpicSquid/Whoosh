@@ -8,11 +8,10 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable
 import net.minecraftforge.common.util.LazyOptional
 
 object TransporterCapProvider : ICapabilitySerializable<CompoundTag?> {
-    private val transporter: ITransporterCap
+     val transporter: ITransporterCap = TODO()
     private val op: LazyOptional<ITransporterCap>
 
     init {
-        transporter = TransporterCap
         op = LazyOptional.of { transporter }
     }
 
