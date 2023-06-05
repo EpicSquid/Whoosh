@@ -57,9 +57,8 @@ class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
 						return InteractionResultHolder(InteractionResult.SUCCESS, stack)
 					}
 				}
-			} else if (getMode(stack) == TELEPORT_MODE) {
-				openScreen(player, this)
-			}
+			} else if (getMode(stack) == TELEPORT_MODE)
+				openScreen(player, TransporterMenu(WhooshMenuTypes.TRANSPORTER, stack, player.inventory, player))
 		}
 		return InteractionResultHolder.success(stack)
 	}
