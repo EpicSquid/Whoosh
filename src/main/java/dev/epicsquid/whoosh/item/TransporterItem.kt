@@ -88,10 +88,10 @@ class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
             0.4f,
             0.8f + 0.4f * getMode(stack)
         )
-        ChatHelper.sendIndexedChatMessageToPlayer(
-            player,
-            if (getMode(stack) == BLINK_MODE) WhooshLang.MODE_BLINK else WhooshLang.MODE_TELEPORT
-        )
+//        ChatHelper.sendIndexedChatMessageToPlayer(
+//            player,
+//            if (getMode(stack) == BLINK_MODE) WhooshLang.MODE_BLINK else WhooshLang.MODE_TELEPORT
+//        )
     }
 
     companion object {

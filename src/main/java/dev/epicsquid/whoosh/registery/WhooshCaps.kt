@@ -30,7 +30,7 @@ class WhooshCaps {
         @SubscribeEvent
         fun attachCapability(event: AttachCapabilitiesEvent<Item?>) {
             if (event.getObject() is TransporterItem) {
-                event.addCapability(TRANSPORTER_CAP_ID, TransporterCapProvider())
+                event.addCapability(TRANSPORTER_CAP_ID, TransporterCapProvider)
             }
         }
     }

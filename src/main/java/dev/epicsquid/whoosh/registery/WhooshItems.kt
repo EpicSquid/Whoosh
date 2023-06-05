@@ -20,7 +20,7 @@ object WhooshItems {
         })
         //add item to Creative mode tab
 
-        .tab(NonNullSupplier<CreativeModeTab> { CreativeModeTab(MODID)})
+//        .tab(NonNullSupplier<CreativeModeTab> { CreativeModeTab(MODID)})
         .register()
 
     fun init() {}

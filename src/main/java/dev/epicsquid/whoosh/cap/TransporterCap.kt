@@ -29,6 +29,7 @@ object TransporterCap : ITransporterCap {
         return tag
     }
 
+    //see problem bellow
     override fun deserializeNBT(nbt: CompoundTag?) {
 //        for (key in nbt.allKeys) {
 //            val tag = nbt[key]

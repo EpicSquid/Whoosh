@@ -5,6 +5,7 @@ import dev.epicsquid.whoosh.registery.WhooshLang
 import dev.epicsquid.whoosh.registery.WhooshMenuTypes
 import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.util.nullness.NonnullType
+import net.minecraft.data.DataGenerator
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.common.data.ForgeBlockTagsProvider
@@ -40,4 +41,8 @@ class Whoosh {
         val blockTagsProvider = ForgeBlockTagsProvider(generator, event.existingFileHelper)
         generator.addProvider(event.includeServer())
     }
+}
+
+private fun DataGenerator.addProvider(includeServer: Boolean) {
+    TODO("Not yet implemented")
 }

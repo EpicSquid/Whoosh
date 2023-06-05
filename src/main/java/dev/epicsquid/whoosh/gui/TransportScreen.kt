@@ -4,11 +4,18 @@ import cofh.core.client.gui.ContainerScreenCoFH
 import cofh.core.client.gui.element.ElementButton
 import cofh.core.client.gui.element.ElementListBox
 import cofh.lib.util.helpers.SoundHelper
+<<<<<<< Updated upstream:src/main/java/dev/epicsquid/whoosh/gui/TransportScreen.kt
 import dev.epicsquid.whoosh.containers.TransporterMenu
 import dev.epicsquid.whoosh.registery.WhooshLang
 import dev.epicsquid.whoosh.utils.TransporterPoint
+=======
+import com.epicsquid.whoosh.containers.TransporterMenu
+import com.epicsquid.whoosh.registery.WhooshLang
+import com.epicsquid.whoosh.utils.TransporterPoint
+>>>>>>> Stashed changes:src/main/java/com/epicsquid/whoosh/gui/TransportScreen.kt
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.epicsquid.whoosh.Whoosh
+import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -113,16 +120,19 @@ class TransportScreen(container: TransporterMenu?, inv: Inventory?, component: C
 
         // Draw the current point info
         if (currentPoint != null) {
-            drawString(poseStack, minecraft!!.font, TextComponent(currentPoint!!.dim()), i + 106, j + 29, -1)
-            drawString(poseStack, minecraft!!.font, TextComponent("X: " + currentPoint!!.x()), i + 106, j + 39, -1)
-            drawString(poseStack, minecraft!!.font, TextComponent("Y: " + currentPoint!!.y()), i + 106, j + 49, -1)
-            drawString(poseStack, minecraft!!.font, TextComponent("Z: " + currentPoint!!.z()), i + 106, j + 59, -1)
+//            drawString(poseStack, minecraft!!.font, TextComponent(currentPoint!!.dim()), i + 106, j + 29, -1)
+//            drawString(poseStack, minecraft!!.font, TextComponent("X: " + currentPoint!!.x()), i + 106, j + 39, -1)
+//            drawString(poseStack, minecraft!!.font, TextComponent("Y: " + currentPoint!!.y()), i + 106, j + 49, -1)
+//            drawString(poseStack, minecraft!!.font, TextComponent("Z: " + currentPoint!!.z()), i + 106, j + 59, -1)
+//        }
         }
     }
-
+//    fun drawString(pPoseStack: PoseStack?, pFont: Font, pText: Component?, pX: Int, pY: Int, pColor: Int) {
+//        pFont.drawShadow(pPoseStack, pText, pX.toFloat(), pY.toFloat(), pColor)
+//    }
     override fun renderLabels(poseStack: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderLabels(poseStack, mouseX, mouseY)
-        //
+//
 //		GlStateManager._enableBlend();
 //		RenderHelper.setPosTexShader();
 //		RenderHelper.setShaderTexture0(SLOT_OVERLAY);

@@ -12,7 +12,7 @@ object TransporterCapProvider : ICapabilitySerializable<CompoundTag?> {
     private val op: LazyOptional<ITransporterCap>
 
     init {
-        transporter = TransporterCap()
+        transporter = TransporterCap
         op = LazyOptional.of { transporter }
     }
 
