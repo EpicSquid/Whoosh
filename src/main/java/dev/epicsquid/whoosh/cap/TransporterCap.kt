@@ -31,11 +31,11 @@ object TransporterCap : ITransporterCap {
 
     //see problem bellow
     override fun deserializeNBT(nbt: CompoundTag?) {
-//        for (key in nbt.allKeys) {
-//            val tag = nbt[key]
-//            if (tag is CompoundTag) {
-//                points[key] = TransporterPoint.fromNBT(tag)
-//            }
-//        }
+        for (key in nbt.allKeys) {
+            val tag = nbt
+            if (tag is CompoundTag) {
+                points[key] = TransporterPoint.fromNBT(tag)
+            }
+        }
     }
 }
