@@ -24,7 +24,6 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraftforge.network.NetworkHooks
 import net.minecraftforge.network.NetworkHooks.openScreen
 import java.util.function.IntSupplier
 import javax.annotation.Nonnull
@@ -58,7 +57,8 @@ class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
 					}
 				}
 			} else if (getMode(stack) == TELEPORT_MODE)
-				openScreen(player, TransporterMenu(WhooshMenuTypes.TRANSPORTER, stack, player.inventory, player))
+				openScreen(player, TransporterMenu(WhooshMenuTypes.TRANSPORTER, player.inventory, player))
+//			pContainerId, pPlayerInventory, pPlayer
 		}
 		return InteractionResultHolder.success(stack)
 	}
