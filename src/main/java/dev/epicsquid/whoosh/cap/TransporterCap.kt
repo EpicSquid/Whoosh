@@ -5,9 +5,9 @@ import net.minecraft.nbt.CompoundTag
 
 object TransporterCap : ITransporterCap {
     override val points: MutableMap<String?, TransporterPoint?> = HashMap()
-//    fun getPoints(): Map<String?, TransporterPoint?> {
-//        return java.util.Map.copyOf(points)
-//    }
+    fun getPoints(): Map<String?, TransporterPoint?> {
+        return java.util.Map.copyOf(points)
+    }
 
     override fun addPoint(name: String?, point: TransporterPoint?) {
         points[name] = point
@@ -29,9 +29,16 @@ object TransporterCap : ITransporterCap {
         return tag
     }
 
-    //see problem bellow
+ fun saveNBTData(compound: CompoundTag?) {
+        val tag = CompoundTag()
+        for (key in points.keys) {
+            tag.put(key, points[key]!!.serializeNBT())
+        }
+        compound!!.put("points", tag)
+    }
+
     override fun deserializeNBT(nbt: CompoundTag?) {
-        for (key in nbt.allKeys) {
+        for (key in nbt!!.allKeys) {
             val tag = nbt
             if (tag is CompoundTag) {
                 points[key] = TransporterPoint.fromNBT(tag)
