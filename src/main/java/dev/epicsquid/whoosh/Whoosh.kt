@@ -2,11 +2,15 @@ package dev.epicsquid.whoosh
 
 import com.mojang.logging.LogUtils
 import com.tterrag.registrate.Registrate
+import com.tterrag.registrate.util.nullness.NonnullType
 import dev.epicsquid.whoosh.registery.WhooshCaps
 import dev.epicsquid.whoosh.registery.WhooshItems
 import dev.epicsquid.whoosh.registery.WhooshLang
 import dev.epicsquid.whoosh.registery.WhooshMenuTypes
 import net.minecraft.client.Minecraft
+import net.minecraft.client.multiplayer.resolver.ServerAddressResolver.LOGGER
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.common.MinecraftForge
@@ -24,65 +28,64 @@ import net.minecraftforge.registries.ForgeRegistries
 class Whoosh {
 
 
-		init {
-				val modEventBus = FMLJavaModLoadingContext.get().modEventBus
+	init {
+		val modEventBus = FMLJavaModLoadingContext.get().modEventBus
 
-				// Register the commonSetup method for modloading
-				modEventBus.addListener { event: FMLCommonSetupEvent ->
-						commonSetup(
-								event
-						)
-				}
-
-				// Register the Deferred Register to the mod event bus so items get registered
-				ITEMS.register(modEventBus)
-				WhooshItems.init()
-				WhooshCaps.init()
-				WhooshLang.init()
-				WhooshMenuTypes.init()
-
-				// Register ourselves for server and other game events we are interested in
-				MinecraftForge.EVENT_BUS.register(this)
+		// Register the commonSetup method for modloading
+		modEventBus.addListener { event: FMLCommonSetupEvent ->
+			commonSetup(
+				event
+			)
 		}
 
-		private fun commonSetup(event: FMLCommonSetupEvent) {
-				// Some common setup code
-				LOGGER.info("HELLO FROM COMMON SETUP")
-				LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))
-		}
+		// Register the Deferred Register to the mod event bus so items get registered
+		WhooshItems.init()//Regsiters Items
+		WhooshCaps.init()//Registers Caps
+		WhooshLang.init()//Registers Lang
+		WhooshMenuTypes.init()//Registers MenuTypes
 
-		// You can use SubscribeEvent and let the Event Bus discover methods to call
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this)
+	}
+
+	private fun commonSetup(event: FMLCommonSetupEvent) {
+		// Some common setup code
+		LOGGER.info("HELLO FROM COMMON SETUP")
+		LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))
+	}
+
+	// You can use SubscribeEvent and let the Event Bus discover methods to call
+	@SubscribeEvent
+	fun onServerStarting(event: ServerStartingEvent?) {
+		// Do something when the server starts
+		LOGGER.info("HELLO from server starting")
+	}
+
+	// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+	@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = [Dist.CLIENT])
+	object ClientModEvents {
 		@SubscribeEvent
-		fun onServerStarting(event: ServerStartingEvent?) {
-				// Do something when the server starts
-				LOGGER.info("HELLO from server starting")
+		fun onClientSetup(event: FMLClientSetupEvent?) {
+			// Some client setup code
+			LOGGER.info("HELLO FROM CLIENT SETUP")
+			LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().user.name)
 		}
+	}
 
-		// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-		@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = [Dist.CLIENT])
-		object ClientModEvents {
-				@SubscribeEvent
-				fun onClientSetup(event: FMLClientSetupEvent?) {
-						// Some client setup code
-						LOGGER.info("HELLO FROM CLIENT SETUP")
-						LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().user.name)
-				}
+	companion object {
+		const val MODID = "whoosh"
+
+		// Directly reference a log4j logger.
+		//Makes creative tab to see mods excludded from thermaal
+		val registrate by lazy { Registrate.create(MODID).creativeModeTab { tab } }
+
+		val tab: CreativeModeTab = object : CreativeModeTab(MODID) {
+			@NonnullType
+			override fun makeIcon(): ItemStack {
+				return ItemStack(WhooshItems.TRANSPORTER.get())
+			}
 		}
-
-		companion object {
-				// Define mod id in a common place for everything to reference
-				const val MODID = "whoosh"
-				val registrate by lazy { Registrate.create(MODID).creativeModeTab { tab } }
-
-
-				// Directly reference a slf4j logger
-				private val LOGGER = LogUtils.getLogger()
-
-
-				// Create a Deferred Register to hold Items which will all be registered under the "whoosh" namespace
-				val ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
-
-		}
+	}
 
 }
 
