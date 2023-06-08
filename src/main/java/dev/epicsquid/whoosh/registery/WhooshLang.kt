@@ -10,18 +10,18 @@ object WhooshLang {
     @JvmField
 	val TRANSPORTER: MutableComponent =
         REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "transporter"), "Transporter")
-    @JvmField
-	val BUTTON_WHOOSH: MutableComponent =
-        REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "button.whoosh"), "Whoosh")
-    @JvmField
-	val ENTER_NAME: MutableComponent =
-        REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "enter_name"), "Enter Name")
-    @JvmField
-	val MODE_BLINK: MutableComponent =
-        REGISTRATE.addLang("info", ResourceLocation(Whoosh.MODID, "transporter.mode.blink"), "Blink")
-    @JvmField
-	val MODE_TELEPORT: MutableComponent =
-        REGISTRATE.addLang("info", ResourceLocation(Whoosh.MODID, "transporter.mod.teleport"), "Teleport")
-
+//    @JvmField
+//	val BUTTON_WHOOSH: MutableComponent =
+//        REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "button.whoosh"), "Whoosh")
+//    @JvmField
+//	val ENTER_NAME: MutableComponent =
+//        REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "enter_name"), "Enter Name")
+//    @JvmField
+//	val MODE_BLINK: MutableComponent =
+//        REGISTRATE.addLang("info", ResourceLocation(Whoosh.MODID, "transporter.mode.blink"), "Blink")
+//    @JvmField
+//	val MODE_TELEPORT: MutableComponent =
+//        REGISTRATE.addLang("info", ResourceLocation(Whoosh.MODID, "transporter.mod.teleport"), "Teleport")
+//
     fun init() {}
 }
