@@ -5,7 +5,9 @@ import cofh.lib.util.constants.NBTTags
 import cofh.thermal.lib.common.ThermalAugmentRules
 import cofh.thermal.lib.item.EnergyContainerItemAugmentable
 import cofh.thermal.lib.item.IFlexibleEnergyContainerItem
+import dev.epicsquid.whoosh.containers.TransporterMenu
 import dev.epicsquid.whoosh.registery.WhooshLang
+import dev.epicsquid.whoosh.registery.WhooshMenuTypes
 import net.minecraft.network.chat.Component
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -17,7 +19,7 @@ import java.util.function.IntSupplier
 
 class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
 	EnergyContainerItemAugmentable(builder, maxEnergy, maxTransfer), IFlexibleEnergyContainerItem, IMultiModeItem,
-		MenuProvider {
+	MenuProvider {
 	init {
 		numSlots = IntSupplier { 4 }
 		augValidator = ThermalAugmentRules.createAllowValidator(
@@ -25,16 +27,17 @@ class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
 		)
 	}
 
-		override fun getEnergyCapability(): Capability<out IEnergyStorage> {
-				TODO("Not yet implemented")
-		}
+	override fun getEnergyCapability(): Capability<out IEnergyStorage> {
+		TODO("Not yet implemented")
+	}
 
-		override fun createMenu(pContainerId: Int, pPlayerInventory: Inventory, pPlayer: Player): AbstractContainerMenu? {
-			return TransporterMenu(WhooshMenuTypes.TRANSPORTER.get(), id, playerInv, player		}
+	override fun createMenu(pContainerId: Int, pPlayerInventory: Inventory, pPlayer: Player): AbstractContainerMenu? {
+		return TransporterMenu(WhooshMenuTypes.TRANSPORTER.get(),type, id, playerInv, player)
+	}
 
-		override fun getDisplayName(): Component {
-	return WhooshLang.TRANSPORTER
-		}
+	override fun getDisplayName(): Component {
+		return WhooshLang.TRANSPORTER
+	}
 
 }
 
