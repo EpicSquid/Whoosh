@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation
 
 object WhooshLang {
     private val REGISTRATE: Registrate = Whoosh.registrate
+
     @JvmField
 	val TRANSPORTER: MutableComponent =
         REGISTRATE.addLang("gui", ResourceLocation(Whoosh.MODID, "transporter"), "Transporter")

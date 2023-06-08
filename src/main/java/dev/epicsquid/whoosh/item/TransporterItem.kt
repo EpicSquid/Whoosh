@@ -30,8 +30,7 @@ class TransporterItem(builder: Properties?, maxEnergy: Int, maxTransfer: Int) :
 		}
 
 		override fun createMenu(pContainerId: Int, pPlayerInventory: Inventory, pPlayer: Player): AbstractContainerMenu? {
-				TODO("Not yet implemented")
-		}
+			return TransporterMenu(WhooshMenuTypes.TRANSPORTER.get(), id, playerInv, player		}
 
 		override fun getDisplayName(): Component {
 	return WhooshLang.TRANSPORTER
